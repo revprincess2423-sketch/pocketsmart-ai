@@ -1,0 +1,25 @@
+# Environment variables (contains your real API key — never commit this)
+.env
+
+# Database
+pocketsmart.db
+*.db
+*.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

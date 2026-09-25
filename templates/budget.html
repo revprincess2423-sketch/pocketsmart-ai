@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Budget - PocketSmart AI{% endblock %}
+{% block content %}
+<h1>Budget</h1>
+
+{% if error %}<div class="alert alert-error">{{ error }}</div>{% endif %}
+{% if summary.warning %}<div class="alert alert-warning">{{ summary.warning }}</div>{% endif %}
+
+<div class="panel">
+  <h2>Set Monthly Budget</h2>
+  <form method="post" action="/budget/update" class="form-grid">
+    <label>Monthly Budget Amount
+      <input type="number" name="monthly_budget" step="0.01" min="0" value="{{ summary.budget }}" required>
+    </label>
+    <button type="submit" class="btn full">Save Budget</button>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>Budget Usage</h2>
+  <div class="progress-track">
+    <div class="progress-fill {% if summary.budget_used_pct >= 100 %}danger{% elif summary.budget_used_pct >= 80 %}warn{% endif %}"
+         style="width: {{ [summary.budget_used_pct, 100] | min }}%;"></div>
+  </div>
+  <p>₹{{ "%.2f"|format(summary.total_expenses) }} spent of ₹{{ "%.2f"|format(summary.budget) }}
+     ({{ summary.budget_used_pct }}%)</p>
+  <p>Remaining budget:
+    <strong>₹{{ "%.2f"|format(summary.budget - summary.total_expenses) }}</strong>
+  </p>
+</div>
+{% endblock %}

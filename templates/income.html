@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Income - PocketSmart AI{% endblock %}
+{% block content %}
+<h1>Income</h1>
+
+{% if error %}<div class="alert alert-error">{{ error }}</div>{% endif %}
+
+<div class="panel">
+  <h2>Add Income</h2>
+  <form method="post" action="/income/add" class="form-grid">
+    <label>Source
+      <input type="text" name="source" required maxlength="100" placeholder="e.g. Salary, Freelance">
+    </label>
+    <label>Amount
+      <input type="number" name="amount" step="0.01" min="0.01" required placeholder="0.00">
+    </label>
+    <label>Date
+      <input type="date" name="date" required>
+    </label>
+    <label class="full">Description (optional)
+      <input type="text" name="description" maxlength="200">
+    </label>
+    <button type="submit" class="btn full">Add Income</button>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>Income History <span class="total-chip">Total: ₹{{ "%.2f"|format(total_income) }}</span></h2>
+  {% if income_list %}
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Date</th><th>Source</th><th>Amount</th><th>Description</th><th></th></tr></thead>
+    <tbody>
+    {% for i in income_list %}
+      <tr>
+        <td>{{ i.date }}</td>
+        <td>{{ i.source }}</td>
+        <td>₹{{ "%.2f"|format(i.amount) }}</td>
+        <td>{{ i.description or "-" }}</td>
+        <td>
+          <form method="post" action="/income/delete/{{ i.id }}" onsubmit="return confirm('Delete this income entry?');">
+            <button type="submit" class="btn-small btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}<p class="empty">No income recorded yet.</p>{% endif %}
+</div>
+{% endblock %}

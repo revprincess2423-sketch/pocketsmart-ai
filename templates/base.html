@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}PocketSmart AI{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+<header class="navbar">
+  <a class="brand" href="/">💰 PocketSmart <span>AI</span></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  <nav id="main-nav">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/income">Income</a>
+    <a href="/expenses">Expenses</a>
+    <a href="/budget">Budget</a>
+    <a href="/recommendations">AI Insights</a>
+  </nav>
+</header>
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <p>PocketSmart AI &mdash; College Project</p>
+</footer>
+
+<script src="{{ url_for('static', path='/js/script.js') }}"></script>
+</body>
+</html>
