@@ -1,4 +1,4 @@
-"""
+""
 services/ai_service.py
 ------------------------
 The single entry point the rest of the app uses for AI recommendations.
